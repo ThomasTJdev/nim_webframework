@@ -1,0 +1,91 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#proc genCompanyAll(c: var TData): string =
+# result = ""
+#
+# let allCompanies = getAllRowsSafe(db, sqlSelect("company", ["id","name"], [""], [""], "", "", "ORDER BY lower(name) ASC"))
+#
+<div id="companyAll">
+  <div id="companyAllTop" class="contentInsideTop">
+    <h1 style="margin-top: 0px;">All companies</h1>
+    ${genericMessage(c)}
+    <div class="" style="margin-bottom: 20px;">
+      <a href="/adminsys/company/add" class="btn btn-sm btn-primary"><i class="fa fa-angle-double-right"></i> Add company</a>
+    </div>
+  </div>
+  <div id="companyAllMain" class="contentInsideMain">
+    <div class="tableUsers" style="padding-left: 10px; padding-right: 10px">
+      <table id="tableUsers" class="table tableDesign">
+        <thead>
+          <tr class="userListItem">
+            <th data-sort="int" style="padding-left: 8px;">ID</th>
+            <th data-sort="string" style="padding-left: 8px;">Name</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+#       for x in allCompanies:
+#         let companyID = x[0]
+#         let name = x[1]
+          <tr class="listitem userListItem">
+            <td class="list-text" style="width: 45px;">$companyID</td>
+            <td class="list-text userListCompany" style="width: 200px;">$name</td>
+            <td><a href="/adminsys/company/edit/${companyID}" class="btn btn-custom btn-primary userEditModal" style="height: 20px; line-height: 20px; width: 35px; padding: 0px;"><i class="fa fa-pencil"></i></a></td>
+            <td><a href="/adminsys/company/dodelete/${companyID}" class="btn btn-custom btn-danger startDeleteModal" style="height: 20px; line-height: 20px; width: 35px; padding: 0px;"><i class="fa fa-trash"></i></a></td>
+          </tr>
+#       end for
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+#end proc
+#
+#
+#
+#
+#proc genCompanyAdd(c: var TData): string =
+# result = ""
+<div class="content">
+  <form id="companyAdd" name="userAdd" action="/adminsys/company/doadd" method="POST">
+    <h1>Add company</h1>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Company name</span>
+      </div>
+      <input type="text" class="form-control" name="name"/>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-success" />Add company</button>
+  </form>
+</div>
+#end proc
+#
+#
+#
+#
+#proc genCompanyEdit(c: var TData, companyID: string): string =
+# result = ""
+#
+# let companyName = getValueSafe(db, sqlSelect("company", ["name"], [""], ["id ="], "", "", ""), companyID)
+<div class="content">
+  <form id="companyEdit" name="userAdd" action="/adminsys/company/doedit/${companyID}" method="POST">
+    <h1>Edit company</h1>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Company name</span>
+      </div>
+      <input type="text" class="form-control" name="name" value="${companyName}"/>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-warning" />Edit company</button>
+  </form>
+</div>
+#end proc

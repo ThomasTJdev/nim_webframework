@@ -1,0 +1,113 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#
+#
+#proc genUserAdd(c: var TData): string =
+# result = ""
+<div class="content">
+  <form id="userAdd" name="userAdd" action="/users/doadd" method="POST">
+    <h1>Add user</h1>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
+      </div>
+      <input type="text" class="form-control" name="name"/>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+      </div>
+      <input type="text" class="form-control" name="email"/>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+      </div>
+      <input id="company" type="text" class="form-control" name="company"/>
+    </div>
+#   if c.rank == AdminSys:
+#
+#     let allCompany = getAllRowsSafe(db, sqlSelect("company", ["id", "name"], [""], [""], "", "", ""))
+#
+#
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Access to</span>
+      </div>
+      <select class="form-control" id="companyaccess" name="companyaccess">
+#
+#       for company in allCompany:
+#
+        <option value="${company[0]}">${company[1]}</option>
+#
+#       end for
+#
+      </select>
+    </div>
+#
+#   end if
+#
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Privileges</span>
+      </div>
+      <select class="form-control" id="rank" name="rank">
+        <option selected>User</option>
+        <option>Viewer</option>
+        <option>Moderator</option>
+        <option>Admin</option>
+        <option>Deactivated</option>
+      </select>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Language</span>
+      </div>
+      <select class="form-control" id="language" name="language">
+        <option selected value="EN">EN</option>
+        <option value="DK">DK</option>
+      </select>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Timezone</span>
+      </div>
+      <select class="form-control" name="timezone">
+        <option id="userAddTimezone" value="" selected="selected"></option>
+        <option value="12" >GMT+12</option>
+        <option value="11" >GMT+11</option>
+        <option value="10" >GMT+10</option>
+        <option value="9" >GMT+09</option>
+        <option value="8" >GMT+08</option>
+        <option value="7" >GMT+07</option>
+        <option value="6" >GMT+06</option>
+        <option value="5" >GMT+05</option>
+        <option value="4" >GMT+04</option>
+        <option value="3" >GMT+03</option>
+        <option value="2" >GMT+02</option>
+        <option value="1" >GMT+01</option>
+        <option value="0" >GMT+00</option>
+        <option value="-1" >GMT-01</option>
+        <option value="-2" >GMT-02</option>
+        <option value="-3" >GMT-03</option>
+        <option value="-4" >GMT-04</option>
+        <option value="-5" >GMT-05</option>
+        <option value="-6" >GMT-06</option>
+        <option value="-7" >GMT-07</option>
+        <option value="-8" >GMT-08</option>
+        <option value="-9" >GMT-09</option>
+        <option value="-10" >GMT-10</option>
+        <option value="-11" >GMT-11</option>
+        <option value="-12" >GMT-12</option>
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-success" id="userAddSubmit" />Add user</button>
+  </form>
+</div>
+#end proc

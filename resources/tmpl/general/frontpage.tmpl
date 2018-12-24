@@ -1,0 +1,103 @@
+#? stdtmpl | standard
+#
+#
+#proc genFrontpage(c: var TData, content, titleBrowser: string): string =
+# result = ""
+<!DOCTYPE html>
+<html lang="EN">
+
+  <head>
+    <title>
+      ${titleBrowser}
+    </title>
+    ${genStandardImportTop(c)}
+    ${genStandardFavicon(c)}
+    <meta name="description" content="Efficient project management.">
+    <meta name="keywords" content="commissioning,cx">
+    <meta name="author" content="Thomas Toftgaard Jarløv">
+    <meta name="copyright" content="TTJ codefactory">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body class="body body-${loggedIn(c)} frontpage">
+
+    <header class="no-print">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a id="sidebarToggle" class="navbar-brand" href="#" style="float: left;">
+          <div class="navbar-button-sidebar-div">
+            <i class="fa fa-bars navbar-button-sidebar navbar-button-sidebar-main" aria-hidden="true"></i>
+          </div>
+          <div class="navbar-brand-logo-div" style="display: inline;">
+            <img class="navbar-brand-logo" alt="Brand" src="/images/logo.png" style="max-height: 35px; margin-top: -3px; ">
+          </div>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <div id="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="center header">Nim Webframework</h1>
+              </div>
+              <hr>
+              <div class="col-12 col-md-4 header text">
+                <div>
+                  <h3 class="center">Quick deployment</h3>
+                  <p class="center">Setup the framework within minutes</p>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 header text">
+                <div>
+                  <h3 class="center">User management</h3>
+                  <p class="center">Manage users - add and edit. Including activation emails.</p>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 header text">
+                <div>
+                  <h3 class="center">Company management</h3>
+                  <p class="center">Compartmentalize companies. Multiple companies on same platform.</p>
+                </div>
+              </div>
+              <div class="col-12">
+                <h1 class="center install">Install</h1>
+              </div>
+              <div class="col-12 col-md-4 install text">
+                <div>
+                  <h3 class="center">Compile</h3>
+                  <p class="center"><kbd>nim c -d:ssl websiteframework.nim</kbd></p>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 install text">
+                <div>
+                  <h3 class="center">Create database</h3>
+                  <p class="center"><kbd>./websiteframework createdb</kbd></p>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 install text">
+                <div>
+                  <h3 class="center">Add admin user</h3>
+                  <p class="center"><kbd>./websiteframework createadmin</kbd></p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="center login">
+                  <a href="/login" class="btn btn-sm btn-primary">Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="frontpage">
+    </footer>
+
+    ${genStandardImportBottom(c)}
+  </body>
+
+</html>
+#end proc

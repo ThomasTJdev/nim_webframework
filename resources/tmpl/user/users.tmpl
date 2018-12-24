@@ -1,0 +1,84 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#proc genUsersAll(c: var TData): string =
+# result = ""
+#
+# var allUsers: seq[Row]
+#
+# if c.rank == AdminSys:
+#   allUsers = getAllRowsSafe(db, sqlSelect("person", ["person.id","person.name","person.email","company.name","person.creation","person.modified","person_access.status","person.lastonline","person_access.company_id"], ["person_access ON person_access.user_id = person.id", "company ON company.id = person_access.company_id"], [""], "", "", "ORDER BY lower(person.name) ASC"))
+#
+# else:
+#   allUsers = getAllRowsSafe(db, sqlSelect("person", ["person.id","person.name","person.email","person.company","person.creation","person.modified","person_access.status","person.lastonline"], ["person_access ON person_access.user_id = person.id"], ["person_access.company_id ="], "", "", "ORDER BY lower(person.name) ASC"), c.companyid)
+
+# end if
+#
+<div id="usersAll">
+  <div id="usersAllTop" class="contentInsideTop">
+    <h1 style="margin-top: 0px;">All users</h1>
+    ${genericMessage(c)}
+    <div class="" style="margin-bottom: 20px;">
+#     if c.rank in [AdminSys, Admin, Moderator]:
+        <a href="/users/add" class="btn btn-sm btn-primary"><i class="fa fa-angle-double-right"></i> Add user</a>
+#     end if
+    </div>
+  </div>
+  <div id="usersAllMain" class="contentInsideMain">
+    <div class="tableUsers" style="padding-left: 10px; padding-right: 10px">
+      <table id="tableUsers" class="table tableDesign">
+        <thead>
+          <tr class="userListItem">
+            <th data-sort="int" style="padding-left: 8px; display: none">ID</th>
+            <th data-sort="string" style="padding-left: 8px;">Company</th>
+            <th data-sort="string" style="padding-left: 8px;">Name</th>
+            <th data-sort="string" style="padding-left: 8px;">Status</th>
+            <th class="d-none d-md-table-cell" data-sort="string" style="padding-left: 8px;">Email</th>
+            <th class="d-none d-md-table-cell" data-sort="string" style="padding-left: 8px;">Registration</th>
+            <th class="d-none d-md-table-cell" data-sort="string" style="padding-left: 8px;">Last online</th>
+#           if c.rank in [AdminSys, Admin, Moderator]:
+              <th>Edit</th>
+              <th>Del</th>
+#           end if
+          </tr>
+        </thead>
+
+        <tbody>
+
+#       for x in allUsers:
+#         let userID = x[0]
+#         let name = x[1]
+#         let email = x[2]
+#         let company = x[3]
+#         let registration = x[4]
+#         let status = x[6]
+#         let lastonline = x[7]
+
+          <tr class="listitem userListItem">
+            <td class="list-text" style="width: 45px; display: none">$userID</td>
+            <td class="list-text userListCompany" style="width: 200px;">$company</td>
+            <td class="list-text userListName" style="width: 250px;">$name</td>
+            <td class="list-text" style="width: 100px;">$status</td>
+            <td class="list-text d-none d-md-table-cell userListEmail" style="width: 250px;">$email</td>
+            <td class="list-text d-none d-md-table-cell" style="width: 200px;">${epochDate(registration, "YYYY-MM-DD", c.timezone)}</td>
+            <td class="list-text d-none d-md-table-cell" style="width: 200px;">${epochDate(lastonline, "YYYY-MM-DD HH:mm", c.timezone)}</td>
+#         if c.rank in [AdminSys, Admin, Moderator]:
+#           var sysCompany = ""
+#           if c.rank == AdminSys:
+#             sysCompany = "?syscompany=" & x[8]
+#           end if
+              <td><a href="/users/edit/${userID}${sysCompany}" class="btn btn-custom btn-primary userEditModal" style="height: 20px; line-height: 20px; width: 35px; padding: 0px;"><i class="fa fa-pencil"></i></a></td>
+              <td><a href="/users/dodelete/${userID}${sysCompany}" class="btn btn-custom btn-danger startDeleteModal" style="height: 20px; line-height: 20px; width: 35px; padding: 0px;"><i class="fa fa-trash"></i></a></td>
+#         end if
+          </tr>
+#       end for
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+#end proc

@@ -1,0 +1,68 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#
+#
+#proc genUserEdit(c: var TData, userID: string, syscompany = ""): string =
+# result = ""
+#
+# var sysCompanyID: string
+#
+# var user: Row
+#
+# if c.rank == AdminSys:
+#   user = getRowSafe(db, sqlSelect("person", ["person.id","person.name","person.email","person.company","person.creation","person.modified","person_access.status","person.lastonline","person_access.company_id"], ["person_access ON person_access.user_id = person.id"], ["person.id = ", "person_access.company_id ="], "", "", "ORDER BY lower(person.name) ASC"), userID, syscompany)
+#
+#   sysCompanyID = "<input name='syscompany' value='" & user[8] & "' style='display:none;'>"
+#
+# else:
+#   user = getRowSafe(db, sqlSelect("person", ["person.id","person.name","person.email","person.company","person.creation","person.modified","person_access.status","person.lastonline"], ["person_access ON person_access.user_id = person.id"], ["person.id = ", "person_access.company_id ="], "", "", "ORDER BY lower(person.name) ASC"), userID, c.companyid)
+#
+# end if
+#
+<div class="content">
+  <form id="userEdit" action="/users/doedit/${user[0]}" method="POST">
+    ${sysCompanyID}
+    <h1>Edit user</h1>
+    ${genericMessage(c)}
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
+      </div>
+      <input type="text" class="form-control" name="name" value="${user[1]}"/>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+      </div>
+      <input type="text" class="form-control" name="email" value="${user[2]}"/>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+      </div>
+      <input id="company" type="text" class="form-control" name="company" value="${user[3]}"/>
+    </div>
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Privileges</span>
+      </div>
+      <select class="form-control" id="rank" name="rank">
+#       for rank in ranks:
+#         if rank == user[6]:
+            <option selected>${rank}</option>
+#         else:
+            <option>${rank}</option>
+#         end if
+#       end for
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-success" />Edit user</button>
+  </form>
+</div>
+#end proc

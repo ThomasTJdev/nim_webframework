@@ -1,0 +1,236 @@
+/*
+  General
+*/
+.center {
+  text-align: center;
+}
+
+/*
+  Main
+*/
+main #content {
+  padding: 10px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+  Navbar
+*/
+.navbar {
+  margin-bottom: 0;
+  height: 50px;
+  background: #171921;
+  border-color: #123d6d;
+}
+#sidebarToggle a,
+#sidebarToggle a:hover,
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand:hover {
+  color: white;
+}
+#sidebarToggle .navbar-button-sidebar-div {
+  display: inline;
+  margin-right: 15px;
+}
+body.body-false #sidebarToggle a {
+  cursor: default;
+}
+body.body-false #sidebarToggle .navbar-button-sidebar-div {
+  display: none;
+}
+/*
+  Sidebar
+*/
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}
+#sidebar.active {
+  margin-left: -250px;
+}
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+#sidebar a[data-toggle="collapse"] {
+  position: relative;
+}
+#sidebar .dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+#sidebar {
+  background: #fff;
+  color: black;
+  transition: all 0.3s;
+  -webkit-box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+}
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #b8b8b8;
+  color: #fff;
+}
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+#sidebar ul p {
+  color: black;
+  padding-left: 10px;
+}
+#sidebar ul li a {
+  color: black;
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#sidebar ul li a:hover {
+  background: rgb(187, 187, 187);
+}
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+  background: #ededed;
+}
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #f8f8f8;
+}
+@media (max-width: 768px) {
+  #sidebar {
+      margin-left: -250px;
+  }
+  #sidebar.active {
+      margin-left: 0;
+  }
+}
+/*
+  Users add
+*/
+form#userAdd,
+form#userEdit {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form#userAdd h1,
+form#userEdit h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+form#userAdd .userinfo span,
+form#userEdit .userinfo span {
+  width: 100px;
+}
+form#userAdd button,
+form#userEdit button {
+  width: 100%;
+}
+/*
+  Users reset password
+*/
+form#resetPassword,
+form#resetPasswordNew {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form#resetPassword h1,
+form#resetPasswordNew h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+form#resetPassword button,
+form#resetPasswordNew button{
+  width: 100%;
+}
+/*
+  Users all
+*/
+div#usersAll {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+  Users register
+*/
+form#userRegister,
+form#userLogin {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form#userRegister h1,
+form#userLogin h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom:2rem;
+}
+/*
+  Admin Sys
+*/
+form#companyAdd,
+form#companyEdit {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form#companyAdd button,
+form#companyEdit button {
+  width: 100%;
+}
+/*
+  Frontpage
+*/
+body.frontpage #content{
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.frontpage h1.header {
+  margin-bottom: 40px;
+  margin-top: 60px;
+}
+body.frontpage .header.text>div {
+  padding: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  height: 150px;
+}
+body.frontpage h1.install {
+  margin-bottom: 40px;
+  margin-top: 60px;
+}
+body.frontpage .install.text>div {
+  padding: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  height: 150px;
+}
+body.frontpage .login {
+  margin-top: 60px;
+}
+body.frontpage .login a {
+  width: 300px;
+}
+body.frontpage img {
+
+}

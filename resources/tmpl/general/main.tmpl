@@ -1,0 +1,82 @@
+#? stdtmpl | standard
+#
+#
+#proc genError(c: var TData, data: string): string =
+# result = ""
+# if c.loggedIn:
+<div style="text-align: center; padding-top: 50px;">
+  <h1>
+    <span class="fa fa-fw fa-ban" style="color: red;"></span>
+    Something went wrong!<br /><br />
+  </h1>
+  <div>
+    $data
+  </div>
+</div>
+# end if
+#end proc
+#
+#
+#proc genInfo(c: var TData, heading: string): string =
+# result = ""
+<div style="text-align: center;width: 300px;">
+  <h1>${heading}</h1>
+  ${genericMessage(c)}
+</div>
+#end proc
+#
+#
+#
+#
+#
+#proc genMain(c: var TData, content, titleBrowser: string): string =
+<!DOCTYPE html>
+<html lang="EN">
+
+  <head>
+    <title>
+      ${titleBrowser}
+    </title>
+    ${genStandardImportTop(c)}
+    ${genStandardFavicon(c)}
+    <meta name="description" content="Efficient project management.">
+    <meta name="keywords" content="commissioning,cx">
+    <meta name="author" content="Thomas Toftgaard Jarløv">
+    <meta name="copyright" content="TTJ codefactory">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body class="body body-${loggedIn(c)}">
+
+    <header class="no-print">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a id="sidebarToggle" class="navbar-brand" href="#" style="float: left;">
+          <div class="navbar-button-sidebar-div">
+            <i class="fa fa-bars navbar-button-sidebar navbar-button-sidebar-main" aria-hidden="true"></i>
+          </div>
+          <div class="navbar-brand-logo-div" style="display: inline;">
+            <img class="navbar-brand-logo" alt="Brand" src="/images/logo.png" style="max-height: 35px; margin-top: -3px; ">
+          </div>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        # if c.loggedIn:
+        ${genSidebar(c)}
+        # end if
+        <div id="content">
+          ${content}
+        </div>
+      </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    ${genStandardImportBottom(c)}
+  </body>
+
+</html>
+#end proc

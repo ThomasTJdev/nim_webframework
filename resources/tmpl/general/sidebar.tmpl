@@ -1,0 +1,68 @@
+#? stdtmpl | standard
+#
+#
+#proc genSidebar(c: var TData): string =
+# result = ""
+<nav id="sidebar">
+  <div class="sidebar-header">
+      <h3>${c.companyview}</h3>
+  </div>
+  <ul class="list-unstyled components">
+    <p>${c.username}</p>
+#
+#   if multipleCompanies:
+#     let companyAccess = getAllRowsSafe(db, sqlSelect("person_access", ["company_id"], [""], ["user_id ="], "", "", ""), c.userid)
+#     if companyAccess.len() > 1:
+        <hr style="margin-bottom:0;">
+        <li>
+          <a href="/company/change"><i class="fa fa-fort-awesome"></i> Change company</a>
+        </li>
+        <hr style="margin-top:0;">
+#     else:
+        <hr>
+#     end if
+#   else:
+      <hr>
+#   end if
+#
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="#pageUsers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
+      <ul class="collapse list-unstyled" id="pageUsers">
+        <li>
+          <a href="/users">All users</a>
+        </li>
+#       if c.rank in [AdminSys, Admin, Moderator]:
+        <li>
+          <a href="/users/add">Add user</a>
+        </li>
+#       end if
+        <li>
+          <a href="/users/edit/${c.userid}">Edit profile</a>
+        </li>
+      </ul>
+    </li>
+#   if c.rank == AdminSys:
+    <li>
+      <a href="#pageSysCompany" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Company</a>
+      <ul class="collapse list-unstyled" id="pageSysCompany">
+        <li>
+          <a href="/adminsys/company/all">All companies</a>
+        </li>
+        <li>
+          <a href="/adminsys/company/add">Add company</a>
+        </li>
+      </ul>
+    </li>
+#   end if
+    <li>
+      <a href="https://github.com/ThomasTJdev">Github</a>
+    </li>
+    <li>
+      <a href="/logout">Logout</a>
+    </li>
+  </ul>
+</nav>
+#end proc

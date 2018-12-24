@@ -1,0 +1,37 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#proc genFormLogin(c: var TData, activationSuccess = "", redirectPath = ""): string =
+# result = ""
+# if not c.loggedIn:
+#
+  <form id="userLogin" name="login" action="/dologin?path=${redirectPath}" method="POST">
+    <h1>Sign in</h1>
+    ${genericMessage(c)}
+    <label for="email" class="loginLabel">Email:</label>
+    <input type="email" class="form-control" name="email" required/>
+    <label for="password" class="loginLabel">Password:</label>
+    <input type="password" class="form-control" name="password" required/>
+    <div class="eulainfo" style="font-size: 11px;margin-top: 5px;margin-bottom:15px;">
+      <input type="checkbox" name="checkbox" value="check" id="agree" onclick="return false;" checked>
+      I agree to the <a href="/eula">terms &amp; and conditions</a>
+    </div>
+    <input href="#" type="submit" class="btn btn-sm btn-success" value="Login" style="width: 100%;" />
+    <p style="margin-top: 10px; text-align: center;">or</p>
+    <div style="text-align: center">
+      <a href="/register" class="btn btn-sm btn-secondary" style="width: 45%;">Register</a>
+      <a href="/resetpassword" class="btn btn-sm btn-secondary" style="width: 45%;">Reset password</a>
+    </div>
+  </form>
+#
+# else:
+#
+  <div style="color:#fc6969;text-align: center;font-size: 2.5rem; padding-top: 50px;"><b>You are already logged in!</b></div>
+#
+# end if
+#
+#end proc

@@ -1,0 +1,36 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#proc genCompanyChange(c: var TData): string =
+# result = ""
+#
+# let allCompanies = getAllRowsSafe(db, sqlSelect("person_access", ["person_access.company_id","person_access.status", "company.name"], ["company ON company.id = person_access.company_id"], ["person_access.user_id ="], "", "", "ORDER BY lower(name) ASC"), c.userid)
+#
+<div class="content">
+  <form id="companyChange" action="/company/change/${c.userid}" method="POST">
+    <h1>Change company access</h1>
+    ${genericMessage(c)}
+    <div class="input-group input-group-sm userinfo">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+      </div>
+      <select class="form-control" name="companyid">
+#       for company in allCompanies:
+#         if company[0] == c.companyid:
+            <option value="${company[0]}" selected>${company[2]} - ${company[1]}</option>
+#         else:
+            <option value="${company[0]}" >${company[2]} - ${company[1]}</option>
+#         end if
+#       end for
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-success"/>Change</button>
+  </form>
+</div>
+#
+#end proc

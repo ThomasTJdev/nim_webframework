@@ -1,0 +1,89 @@
+#? stdtmpl | standard
+#
+#template `%`(idx: untyped): untyped =
+#  row[idx]
+#end template
+#
+#
+#proc genFormRegister(c: var TData, msg = ""): string =
+# result = ""
+# if not c.loggedIn and openRegistration:
+#
+<form id="userRegister" action="${c.req.makeUri("/doregister", false)}" method="POST">
+  <h1>Register an account</h1>
+  ${genericMessage(c)}
+  <label class="registerLabel" for="name">Name:</label>
+  <input type="text" class="registerInput form-control" name="name" required/>
+  <div>
+    <label class="registerLabel" for="new_password">Password:</label>
+    <input type="password" minlength="${$minPassLength}" class="registerInput form-control" name="new_password" id="userPassword" required/>
+  </div>
+  <label class="registerLabel" for="email">E-mail:</label>
+  <input type="email" class="registerInput form-control" name="email" required/>
+  <label class="registerLabel" for="company">Company:</label>
+  <input type="text" class="registerInput form-control" name="company"/>
+  <label class="registerLabel">Language:</label>
+  <div>
+    <select class="form-control" id="language" name="language" data-width="300px">
+      <option selected value="EN">EN</option>
+      <option value="DK">DK</option>
+    </select>
+  </div>
+  <label class="registerLabel" for="timezone">Timezone:</label>
+  <div>
+    <select class="form-control dropdownSelect2Timezone dropdownSelect2TimezoneAdd" id="userEditTimezone" name="timezone" data-width="100%">
+      <option id="userAddTimezone" value="" selected="selected"></option>
+      <option value="12" >GMT+12</option>
+      <option value="11" >GMT+11</option>
+      <option value="10" >GMT+10</option>
+      <option value="9" >GMT+09</option>
+      <option value="8" >GMT+08</option>
+      <option value="7" >GMT+07</option>
+      <option value="6" >GMT+06</option>
+      <option value="5" >GMT+05</option>
+      <option value="4" >GMT+04</option>
+      <option value="3" >GMT+03</option>
+      <option value="2" >GMT+02</option>
+      <option value="1" >GMT+01</option>
+      <option value="0" >GMT+00</option>
+      <option value="-1" >GMT-01</option>
+      <option value="-2" >GMT-02</option>
+      <option value="-3" >GMT-03</option>
+      <option value="-4" >GMT-04</option>
+      <option value="-5" >GMT-05</option>
+      <option value="-6" >GMT-06</option>
+      <option value="-7" >GMT-07</option>
+      <option value="-8" >GMT-08</option>
+      <option value="-9" >GMT-09</option>
+      <option value="-10" >GMT-10</option>
+      <option value="-11" >GMT-11</option>
+      <option value="-12" >GMT-12</option>
+    </select>
+  </div>
+  <br />
+#
+#   if useCaptcha:
+#
+    <div>
+      <div class="g-recaptcha" data-sitekey="6LfPUDYUAAAAAAyFxBXIkhbUKNow2Jxd8PUqtj6Z" data-theme="light" style="transform:scale(0.93);-webkit-transform:scale(0.93);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div>
+#
+#   end if
+#
+  <div class="eulainfo" style="font-size: 11px; margin-top: 5px;">
+    <input type="checkbox" name="checkbox" value="check" id="agree" onclick="return false;" checked>
+    I agree to the <a href="/eula">terms &amp; and conditions</a>
+  </div>
+  <button type="submit" class="btn btn-sm btn-success registerBtnSubmit" style="width: 100%;">Register</button>
+</form>
+# elif not openRegistration:
+<div style="text-align: center">
+  <h3>Registration is disabled</h3>
+  <p>Please contact the system administration at ${supportEmail}</p>
+</div>
+# else:
+  <span style="color:red">You are already logged in!</span>
+# end if
+#
+#end proc
