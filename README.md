@@ -83,7 +83,7 @@ Open `resources/routes/routes_general.nim` and insert:
     if not c.loggedIn:
       resp genMain(c, genFormLogin(c, redirectPath=c.req.path), "Log in")
     else:
-      resp genAbout(c, "", "About")
+      resp genMain(c, genAbout(c), "About")
 ```
 
 ### Create HTML
